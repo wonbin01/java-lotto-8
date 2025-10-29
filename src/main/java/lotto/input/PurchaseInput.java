@@ -2,18 +2,18 @@ package lotto.input;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import lotto.validator.PurchaseInputHandler;
+import lotto.validator.PurchaseInputValidator;
 
 public class PurchaseInput {
-    static PurchaseInputHandler inputHandler = new PurchaseInputHandler();
+    static PurchaseInputValidator purchseValidator = new PurchaseInputValidator();
 
     public static void purchaseInputHadnler() {
         while (true) {
             System.out.println("구입금액을 입력해 주세요.");
             String input = readLine();
             try {
-                inputHandler.isBlank(input);
-                
+                purchseValidator.isBlank(input);
+
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
