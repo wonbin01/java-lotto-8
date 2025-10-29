@@ -2,6 +2,7 @@ package lotto.validator;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class InputValidator {
@@ -66,6 +67,12 @@ public class InputValidator {
     public void checkLottoCount(List<Integer> list) {
         if (list.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개 입력되어야합니다.");
+        }
+    }
+
+    public void checkhasDuplicates(List<Integer> list) {
+        if (list.size() != new HashSet<>(list).size()) {
+            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
     }
 }

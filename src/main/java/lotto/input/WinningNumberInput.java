@@ -16,6 +16,7 @@ public class WinningNumberInput {
                 List<Integer> candidate = validator.commaSeparatedNumbers(input);
                 validator.checkLottoCount(candidate);
                 validator.checkInLottoRange(candidate);
+                validator.checkhasDuplicates(candidate);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
