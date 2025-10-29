@@ -34,6 +34,6 @@ public class PurchaseInputValidator {
         if (purchaseAmount % unit != 0) {
             throw new IllegalArgumentException("1000원 단위로 입력해야 합니다.");
         }
-        return purchaseAmount % unit;
+        return purchaseAmount / unit;
     }
 }

@@ -1,29 +1,69 @@
 package lotto.input;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-
+import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import lotto.Lotto;
 import lotto.validator.PurchaseInputValidator;
 
 public class PurchaseInput {
-    static PurchaseInputValidator purchseValidator = new PurchaseInputValidator();
-    static Long purchaseAmount;
-    static Long purchaseCount;
 
-    public static void purchaseInputHadnler() {
+    static PurchaseInputValidator purchaseValidator = new PurchaseInputValidator();
+
+    public static void purchaseInputHandler() {
+        long purchaseCount = getValidPurchaseCount();
+        List<Lotto> lottoList = generateLottos(purchaseCount);
+        printLottos(lottoList);
+    }
+
+    private static long getValidPurchaseCount() {
+        long purchaseAmount;
+        long purchaseCount;
         while (true) {
             System.out.println("구입금액을 입력해 주세요.");
-            String input = readLine().trim();
+            String input = Console.readLine().trim();
             try {
-                purchseValidator.checkBlank(input);
-                purchseValidator.checkNumber(input);
-                purchaseAmount = purchseValidator.checkRange(input);
-                purchseValidator.checkPositive(purchaseAmount);
-                Long purchaseCount = purchseValidator.checkThousandUnit(purchaseAmount);
-                break;
+                purchaseValidator.checkBlank(input);
+                purchaseValidator.checkNumber(input);
+                purchaseAmount = purchaseValidator.checkRange(input);
+                purchaseValidator.checkPositive(purchaseAmount);
+                purchaseCount = purchaseValidator.checkThousandUnit(purchaseAmount);
+                return purchaseCount;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
             }
         }
+    }
 
+    private static List<Lotto> generateLottos(long purchaseCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+        while (true) {
+            lottoList.clear();
+            try {
+                for (long i = 0; i < purchaseCount; i++) {
+                    List<Integer> candidates = generateNumbers();
+                    Collections.sort(candidates);
+                    Lotto lotto = new Lotto(candidates);
+                    lottoList.add(lotto);
+                }
+                return lottoList;
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 로또 생성 중 오류가 발생했습니다. 처음부터 다시 생성합니다.");
+            }
+        }
+    }
+
+    private static void printLottos(List<Lotto> lottoList) {
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto);
+        }
+    }
+
+    private static List<Integer> generateNumbers() {
+        return Randoms.pickUniqueNumbersInRange(1, 45, 6);
     }
 }
+
