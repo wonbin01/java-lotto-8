@@ -64,6 +64,20 @@ public class InputValidator {
         }
     }
 
+    public int checkBonusRange(String input) {
+        int num;
+        try {
+            num = Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("보너스 번호는 1~45 사이여야 합니다.");
+        }
+        if (num < 1 || num > 45) {
+            throw new IllegalArgumentException("보너스 번호는 1~45 사이여야 합니다.");
+        }
+        return num;
+    }
+
+
     public void checkLottoCount(List<Integer> list) {
         if (list.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개 입력되어야합니다.");

@@ -6,6 +6,6 @@ import lotto.input.WinningNumberInput;
 public class Application {
     public static void main(String[] args) {
         PurchaseInput.purchaseInputHandler();
-        WinningNumberInput.getWinningNumbers();
+        WinningNumberInput.winningNumberHandler();
     }
 }
