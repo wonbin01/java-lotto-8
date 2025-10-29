@@ -15,6 +15,8 @@ public class PurchaseInput {
             try {
                 purchseValidator.checkBlank(input);
                 purchseValidator.checkNumber(input);
+                purchaseAmount = purchseValidator.checkRange(input);
+                purchseValidator.checkPositive(purchaseAmount);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
