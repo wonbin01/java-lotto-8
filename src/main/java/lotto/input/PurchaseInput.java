@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.Lotto;
-import lotto.validator.PurchaseInputValidator;
+import lotto.validator.InputValidator;
 
 public class PurchaseInput {
 
-    static PurchaseInputValidator purchaseValidator = new PurchaseInputValidator();
+    static InputValidator purchaseValidator = new InputValidator();
     static List<Lotto> lottoList = new ArrayList<>();
 
     public static void purchaseInputHandler() {

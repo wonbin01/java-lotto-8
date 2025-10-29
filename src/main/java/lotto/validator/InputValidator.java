@@ -1,7 +1,7 @@
 package lotto.validator;
 
 
-public class PurchaseInputValidator {
+public class InputValidator {
     Long unit = 1000L;
 
     public void checkBlank(String input) {
