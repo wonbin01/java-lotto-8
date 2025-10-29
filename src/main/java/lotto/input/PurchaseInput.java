@@ -11,10 +11,11 @@ import lotto.validator.PurchaseInputValidator;
 public class PurchaseInput {
 
     static PurchaseInputValidator purchaseValidator = new PurchaseInputValidator();
+    static List<Lotto> lottoList = new ArrayList<>();
 
     public static void purchaseInputHandler() {
         long purchaseCount = getValidPurchaseCount();
-        List<Lotto> lottoList = generateLottos(purchaseCount);
+        lottoList = generateLottos(purchaseCount);
         printLottos(lottoList);
     }
 
@@ -64,6 +65,10 @@ public class PurchaseInput {
 
     private static List<Integer> generateNumbers() {
         return Randoms.pickUniqueNumbersInRange(1, 45, 6);
+    }
+
+    public List<Lotto> getLottos() {
+        return lottoList;
     }
 }
 
