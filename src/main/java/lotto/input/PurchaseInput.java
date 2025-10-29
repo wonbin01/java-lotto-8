@@ -42,18 +42,26 @@ public class PurchaseInput {
         List<Lotto> lottoList = new ArrayList<>();
         while (true) {
             lottoList.clear();
-            try {
-                for (long i = 0; i < purchaseCount; i++) {
-                    List<Integer> candidates = generateNumbers();
-                    Collections.sort(candidates);
-                    Lotto lotto = new Lotto(candidates);
-                    lottoList.add(lotto);
-                }
-                return lottoList;
-            } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 로또 생성 중 오류가 발생했습니다. 처음부터 다시 생성합니다.");
+            List<Lotto> lottocandidate = getLottos(purchaseCount, lottoList);
+            if (lottocandidate != null) {
+                return lottocandidate;
             }
         }
+    }
+
+    private static List<Lotto> getLottos(long purchaseCount, List<Lotto> lottoList) {
+        try {
+            for (long i = 0; i < purchaseCount; i++) {
+                List<Integer> candidates = generateNumbers();
+                Collections.sort(candidates);
+                Lotto lotto = new Lotto(candidates);
+                lottoList.add(lotto);
+            }
+            return lottoList;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 로또 생성 중 오류가 발생했습니다. 처음부터 다시 생성합니다.");
+        }
+        return null;
     }
 
     private static void printLottos(List<Lotto> lottoList) {
