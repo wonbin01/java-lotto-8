@@ -6,6 +6,8 @@ import java.util.List;
 
 public class InputValidator {
     Long unit = 1000L;
+    int min = 1;
+    int max = 45;
 
     public void checkBlank(String input) {
         if (input.equals("")) {
@@ -55,9 +57,15 @@ public class InputValidator {
 
     public void checkInLottoRange(List<Integer> list) {
         for (int num : list) {
-            if (num < 1 || num > 45) {
+            if (num < min || num > max) {
                 throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
             }
+        }
+    }
+
+    public void checkLottoCount(List<Integer> list) {
+        if (list.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개 입력되어야합니다.");
         }
     }
 }
