@@ -6,9 +6,20 @@ import lotto.validator.InputValidator;
 
 public class WinningNumberInput {
     static InputValidator validator = new InputValidator();
+    static List<Integer> winningNumbers;
+    static int bonusNumber;
 
     public static void winningNumberHandler() {
-        List<Integer> winningNumbers = getValidWinningNumbers();
+        winningNumbers = getValidWinningNumbers();
+        bonusNumber = getBonusNumber(winningNumbers);
+    }
+
+    public static List<Integer> getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public static int getBonusNumber() {
+        return getBonusNumber(winningNumbers);
     }
 
     public static List<Integer> getValidWinningNumbers() {
@@ -20,7 +31,7 @@ public class WinningNumberInput {
                 List<Integer> candidate = validator.commaSeparatedNumbers(input);
                 validator.checkLottoCount(candidate);
                 validator.checkInLottoRange(candidate);
-                validator.checkhasDuplicates(candidate);
+                validator.checkhHasDuplicates(candidate);
                 return candidate;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
@@ -28,16 +39,19 @@ public class WinningNumberInput {
         }
     }
 
-    public static int getBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        String input = Console.readLine().trim();
-        try {
-            validator.checkBlank(input);
-            validator.checkNumber(input);
-            int bonus = validator.checkBonusRange(input);
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
+    public static int getBonusNumber(List<Integer> winningNumbers) {
+        while (true) {
+            System.out.println("보너스 번호를 입력해 주세요.");
+            String input = Console.readLine().trim();
+            try {
+                validator.checkBlank(input);
+                validator.checkNumber(input);
+                int bonus = validator.checkBonusRange(input);
+                validator.checkDuplicateWithWinningNumber(winningNumbers, bonus);
+                return bonus;
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] " + e.getMessage());
+            }
         }
     }
 }

@@ -48,7 +48,8 @@ public class InputValidator {
         String[] tokens = input.split(",");
         for (String token : tokens) {
             try {
-                list.add(Integer.parseInt(token.trim()));
+                String changed = token.replaceAll(" ", "");
+                list.add(Integer.parseInt(changed));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("정수를 입력해야합니다.");
             }
@@ -84,9 +85,15 @@ public class InputValidator {
         }
     }
 
-    public void checkhasDuplicates(List<Integer> list) {
+    public void checkhHasDuplicates(List<Integer> list) {
         if (list.size() != new HashSet<>(list).size()) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+        }
+    }
+
+    public void checkDuplicateWithWinningNumber(List<Integer> winningNumbers, int bonus) {
+        if (winningNumbers.contains(bonus)) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호사이에서 중복된 숫자가 존재합니다.");
         }
     }
 }
