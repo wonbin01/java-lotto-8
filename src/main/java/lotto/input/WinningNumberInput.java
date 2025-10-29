@@ -1,6 +1,7 @@
 package lotto.input;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import lotto.validator.InputValidator;
 
 public class WinningNumberInput {
@@ -12,7 +13,8 @@ public class WinningNumberInput {
             String input = Console.readLine().trim();
             try {
                 validator.checkBlank(input);
-
+                List<Integer> candidate = validator.commaSeparatedNumbers(input);
+                validator.checkInLottoRange(candidate);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());

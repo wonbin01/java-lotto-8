@@ -1,6 +1,9 @@
 package lotto.validator;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputValidator {
     Long unit = 1000L;
 
@@ -35,5 +38,26 @@ public class InputValidator {
             throw new IllegalArgumentException("1000원 단위로 입력해야 합니다.");
         }
         return purchaseAmount / unit;
+    }
+
+    public List<Integer> commaSeparatedNumbers(String input) {
+        List<Integer> list = new ArrayList<>();
+        String[] tokens = input.split(",");
+        for (String token : tokens) {
+            try {
+                list.add(Integer.parseInt(token.trim()));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("정수를 입력해야합니다.");
+            }
+        }
+        return list;
+    }
+
+    public void checkInLottoRange(List<Integer> list) {
+        for (int num : list) {
+            if (num < 1 || num > 45) {
+                throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
+            }
+        }
     }
 }
