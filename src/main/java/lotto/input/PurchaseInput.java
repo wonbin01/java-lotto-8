@@ -10,10 +10,10 @@ public class PurchaseInput {
     public static void purchaseInputHadnler() {
         while (true) {
             System.out.println("구입금액을 입력해 주세요.");
-            String input = readLine();
+            String input = readLine().trim();
             try {
                 purchseValidator.isBlank(input);
-
+                purchseValidator.isNumber(input.trim());
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
