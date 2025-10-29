@@ -2,6 +2,8 @@ package lotto.validator;
 
 
 public class PurchaseInputValidator {
+    Long unit = 1000L;
+
     public void checkBlank(String input) {
         if (input.equals("")) {
             throw new IllegalArgumentException("입력값이 비어있습니다.");
@@ -23,8 +25,14 @@ public class PurchaseInputValidator {
     }
 
     public void checkPositive(Long purchaseAmount) {
-        if (purchaseAmount < 0) {
+        if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("양수를 입력해야 합니다.");
+        }
+    }
+
+    public void checkThousandUnit(Long purchaseAmount) {
+        if (purchaseAmount % unit != 0) {
+            throw new IllegalArgumentException("1000원 단위로 입력해야 합니다.");
         }
     }
 }

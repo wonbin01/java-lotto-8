@@ -17,6 +17,7 @@ public class PurchaseInput {
                 purchseValidator.checkNumber(input);
                 purchaseAmount = purchseValidator.checkRange(input);
                 purchseValidator.checkPositive(purchaseAmount);
+                purchseValidator.checkThousandUnit(purchaseAmount);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
