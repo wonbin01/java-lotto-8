@@ -7,6 +7,7 @@ import lotto.validator.PurchaseInputValidator;
 public class PurchaseInput {
     static PurchaseInputValidator purchseValidator = new PurchaseInputValidator();
     static Long purchaseAmount;
+    static Long purchaseCount;
 
     public static void purchaseInputHadnler() {
         while (true) {
@@ -17,11 +18,12 @@ public class PurchaseInput {
                 purchseValidator.checkNumber(input);
                 purchaseAmount = purchseValidator.checkRange(input);
                 purchseValidator.checkPositive(purchaseAmount);
-                purchseValidator.checkThousandUnit(purchaseAmount);
+                Long purchaseCount = purchseValidator.checkThousandUnit(purchaseAmount);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
             }
         }
+
     }
 }

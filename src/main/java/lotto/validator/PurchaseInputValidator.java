@@ -30,9 +30,10 @@ public class PurchaseInputValidator {
         }
     }
 
-    public void checkThousandUnit(Long purchaseAmount) {
+    public Long checkThousandUnit(Long purchaseAmount) {
         if (purchaseAmount % unit != 0) {
             throw new IllegalArgumentException("1000원 단위로 입력해야 합니다.");
         }
+        return purchaseAmount % unit;
     }
 }
