@@ -67,7 +67,7 @@ public class PurchaseInput {
         return Randoms.pickUniqueNumbersInRange(1, 45, 6);
     }
 
-    public List<Lotto> getLottos() {
+    public static List<Lotto> getLottos() {
         return lottoList;
     }
 }
