@@ -1,11 +1,13 @@
 package lotto;
 
-import lotto.input.PurchaseInput;
+import lotto.controller.LottoController;
 import lotto.input.WinningNumberInput;
 
 public class Application {
+    static LottoController lottoController = new LottoController();
+
     public static void main(String[] args) {
-        PurchaseInput.purchaseInputHandler();
+        lottoController.run();
         WinningNumberInput.winningNumberHandler();
     }
 }
