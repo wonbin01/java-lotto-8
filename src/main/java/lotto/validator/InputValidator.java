@@ -4,6 +4,7 @@ package lotto.validator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lotto.dto.WinningNumbersDto;
 
 public class InputValidator {
     Long unit = 1000L;
@@ -91,8 +92,8 @@ public class InputValidator {
         }
     }
 
-    public void checkDuplicateWithWinningNumber(List<Integer> winningNumbers, int bonus) {
-        if (winningNumbers.contains(bonus)) {
+    public void checkDuplicateWithWinningNumber(WinningNumbersDto winningNumbersDto, int bonus) {
+        if (winningNumbersDto.getWinningNumbers().contains(bonus)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호사이에서 중복된 숫자가 존재합니다.");
         }
     }

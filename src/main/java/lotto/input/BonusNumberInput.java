@@ -2,14 +2,14 @@ package lotto.input;
 
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
 import lotto.dto.BonusNumberDto;
+import lotto.dto.WinningNumbersDto;
 import lotto.validator.InputValidator;
 
 public class BonusNumberInput {
     static InputValidator validator = new InputValidator();
 
-    public BonusNumberDto getBonusNumber(List<Integer> winningNumbers) {
+    public BonusNumberDto getBonusNumber(WinningNumbersDto winningNumbers) {
         while (true) {
             System.out.println("보너스 번호를 입력해 주세요.");
             String input = Console.readLine().trim();
