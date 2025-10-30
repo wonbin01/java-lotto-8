@@ -11,5 +11,6 @@ public class LottoController {
     public void run() {
         PurchaseDto dto = PurchaseInput.getValidPurchaseDto();
         LottoListDto lottoListDto = lottoService.generateLottos(dto);
+        lottoService.printLottos(lottoListDto);
     }
 }

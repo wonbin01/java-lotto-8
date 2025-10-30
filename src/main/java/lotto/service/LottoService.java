@@ -31,4 +31,11 @@ public class LottoService {
         return Randoms.pickUniqueNumbersInRange(1, 45, 6);
     }
 
+    public void printLottos(LottoListDto lottoListDto) {
+        System.out.println(lottoListDto.getLottolist().size() + "개를 구매했습니다");
+        for (Lotto lotto : lottoListDto.getLottolist()) {
+            System.out.println(lotto);
+        }
+    }
+
 }
