@@ -15,8 +15,8 @@ public class LottoController {
     private final BonusNumberInput bonusNumberInput = new BonusNumberInput();
 
     public void run() {
-        PurchaseDto dto = PurchaseInput.getValidPurchaseDto();
-        LottoListDto lottoListDto = lottoService.generateLottos(dto);
+        PurchaseDto purchaseDto = PurchaseInput.getValidPurchaseDto();
+        LottoListDto lottoListDto = lottoService.generateLottos(purchaseDto);
         lottoService.printLottos(lottoListDto);
         WinningNumbersDto validWinningNumbers = winningNumberInput.getValidWinningNumbers();
         BonusNumberDto bonusNumber = bonusNumberInput.getBonusNumber(validWinningNumbers);
