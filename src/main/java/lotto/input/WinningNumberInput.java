@@ -24,20 +24,4 @@ public class WinningNumberInput {
             }
         }
     }
-
-    public static int getBonusNumber(List<Integer> winningNumbers) {
-        while (true) {
-            System.out.println("보너스 번호를 입력해 주세요.");
-            String input = Console.readLine().trim();
-            try {
-                validator.checkBlank(input);
-                validator.checkNumber(input);
-                int bonus = validator.checkBonusRange(input);
-                validator.checkDuplicateWithWinningNumber(winningNumbers, bonus);
-                return bonus;
-            } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] " + e.getMessage());
-            }
-        }
-    }
 }
