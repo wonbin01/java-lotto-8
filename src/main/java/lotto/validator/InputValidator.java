@@ -4,13 +4,11 @@ package lotto.validator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lotto.domain.LottoRange;
 import lotto.dto.WinningNumbersDto;
 import lotto.exception.ExceptionMessage;
 
 public class InputValidator {
-    Long unit = 1000L;
-    int min = 1;
-    int max = 45;
 
     public void checkBlank(String input) {
         if (input.equals("")) {
@@ -39,10 +37,10 @@ public class InputValidator {
     }
 
     public Long checkThousandUnit(Long purchaseAmount) {
-        if (purchaseAmount % unit != 0) {
+        if (purchaseAmount % LottoRange.UNIT.getValue() != 0) {
             throw new IllegalArgumentException(ExceptionMessage.CHECK_THOUSAND_UNIT.getMessage());
         }
-        return purchaseAmount / unit;
+        return purchaseAmount / LottoRange.UNIT.getValue();
     }
 
     public List<Integer> commaSeparatedNumbers(String input) {
@@ -61,7 +59,7 @@ public class InputValidator {
 
     public void checkInLottoRange(List<Integer> list) {
         for (int num : list) {
-            if (num < min || num > max) {
+            if (num < LottoRange.MIN.getValue() || num > LottoRange.MAX.getValue()) {
                 throw new IllegalArgumentException(ExceptionMessage.CHECK_IN_LOTTO_RANGE.getMessage());
             }
         }
