@@ -10,6 +10,7 @@ import lotto.dto.BonusNumberDto;
 import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
 import lotto.dto.WinningNumbersDto;
+import lotto.exception.ExceptionMessage;
 
 public class LottoService {
     int firstPrice = 2000000000;
@@ -30,7 +31,7 @@ public class LottoService {
                 }
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 로또 생성 중 오류가 발생했습니다. 처음부터 다시 생성합니다.");
+                System.out.println(ExceptionMessage.ERROR_DURING_GENERATE.getMessage());
             }
         }
         return new LottoListDto(lottoList);
