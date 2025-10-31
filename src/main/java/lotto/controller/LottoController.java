@@ -24,5 +24,6 @@ public class LottoController {
         BonusNumberDto bonusNumber = bonusNumberInput.getBonusNumber(validWinningNumbers);
         List<LottoMatchResult> mathResults = lottoService.validateResult(lottoListDto, validWinningNumbers,
                 bonusNumber);
+        lottoService.printResults(mathResults);
     }
 }
