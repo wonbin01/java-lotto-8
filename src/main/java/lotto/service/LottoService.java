@@ -23,7 +23,7 @@ public class LottoService {
         while (true) {
             try {
                 for (long i = 0; i < dto.getPurchaseCount(); i++) {
-                    List<Integer> candidates = generateNumbers();
+                    List<Integer> candidates = new ArrayList<>(generateNumbers());
                     Collections.sort(candidates);
                     Lotto lotto = new Lotto(candidates);
                     lottoList.add(lotto);
@@ -90,8 +90,9 @@ public class LottoService {
 
         long totalPrice =
                 firstWinnerPrice + secondWinnerPrice + thirdWinnerPrice + fourthWinnerPrice + fifthWinnerPrice;
-        float positiveRate = (float) (totalPrice - purchaseAmount) / purchaseAmount * 100;
-        positiveRate = Math.round(positiveRate * 10) / 10.0f;
+        float positiveRate = ((float) totalPrice / purchaseAmount) * 100;
+        positiveRate = Math.round(positiveRate * 10) / 10.0f; // 둘째 자리에서 반올림
         return positiveRate;
+
     }
 }
