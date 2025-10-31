@@ -60,25 +60,38 @@ public class LottoService {
         return results;
     }
 
+    private int getPrizeIndex(int matchCount, boolean isBonus) {
+        if (matchCount == 6) {
+            return 1;           // 1등
+        }
+        if (matchCount == 5 && isBonus) {
+            return 2; // 2등
+        }
+        if (matchCount == 5) {
+            return 3;           // 3등
+        }
+        if (matchCount == 4) {
+            return 4;           // 4등
+        }
+        if (matchCount == 3) {
+            return 5;           // 5등
+        }
+        return 0;                                // 당첨 없음
+    }
+
     public int[] getMatchResult(List<LottoMatchResult> results) {
         int[] matchResult = new int[6];
+
         for (LottoMatchResult result : results) {
-            int count = result.getMatchCount();
-            boolean bonus = result.getIsBonusMatch();
-            if (count == 6) {
-                matchResult[1]++; //1등
-            } else if (count == 5 && bonus) {
-                matchResult[2]++; //2등
-            } else if (count == 5) {
-                matchResult[3]++; //3등
-            } else if (count == 4) {
-                matchResult[4]++; //4등
-            } else if (count == 3) {
-                matchResult[5]++;
+            int index = getPrizeIndex(result.getMatchCount(), result.getIsBonusMatch());
+            if (index != 0) {
+                matchResult[index]++;
             }
         }
+
         return matchResult;
     }
+
 
     public float calculateMoney(int[] matchResult, PurchaseDto dto) {
         long purchaseAmount = dto.getPurchaseAmount();
