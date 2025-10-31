@@ -59,4 +59,10 @@ public class LottoService {
         }
         return results;
     }
+
+    public void printResults(List<LottoMatchResult> results) {
+        System.out.println("당첨 통계");
+        System.out.println("---");
+
+    }
 }
