@@ -90,7 +90,7 @@ public class LottoService {
 
         long totalPrice =
                 firstWinnerPrice + secondWinnerPrice + thirdWinnerPrice + fourthWinnerPrice + fifthWinnerPrice;
-        float positiveRate = (float) totalPrice / purchaseAmount;
+        float positiveRate = (float) (totalPrice - purchaseAmount) / purchaseAmount * 100;
         positiveRate = Math.round(positiveRate * 10) / 10.0f;
         return positiveRate;
     }
