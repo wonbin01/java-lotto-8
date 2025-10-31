@@ -14,7 +14,7 @@ public enum ExceptionMessage {
     CHECK_RANGE("범위를 벗어났습니다. 입력범위 : 약 9경까지"),
     CHECK_POSIVITE("양수를 입력해야 합니다."),
     CHECK_THOUSAND_UNIT("1000원 단위로 입력해야 합니다."),
-    COMMA_SEPARATE_NUMBERS("정수를 입력해야합니다."),
+    COMMA_SEPARATE_NUMBERS("1~45 사이의 정수 6개를 입력해야 합니다."),
     CHECK_IN_LOTTO_RANGE("로또 번호는 1~45 사이여야 합니다."),
     CHECK_BONUS_NUMBER("보너스 번호는 1~45 사이여야 합니다."),
     CHECK_LOTTO_COUNT("로또 번호는 6개 입력되어야합니다."),
