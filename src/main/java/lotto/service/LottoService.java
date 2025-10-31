@@ -4,9 +4,11 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.Lotto;
+import lotto.dto.BonusNumberDto;
 import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
+import lotto.dto.WinningNumbersDto;
+import lotto.entity.Lotto;
 
 public class LottoService {
     public LottoListDto generateLottos(PurchaseDto dto) {
@@ -38,4 +40,20 @@ public class LottoService {
         }
     }
 
+    public void validateResult(LottoListDto lottoListDto, WinningNumbersDto winningNumbersDto,
+                               BonusNumberDto bonusNumberDto) { // 당첨 로또 번호 확인
+        for (Lotto lotto : lottoListDto.getLottolist()) {
+            int originalBall = 0;
+            int bonusBall = 0;
+            for (int num : lotto.getNumbers()) {
+                if (winningNumbersDto.getWinningNumbers().contains(num)) {
+                    originalBall++;
+                }
+                if (bonusNumberDto.getBonusNumber() == num) {
+                    bonusBall++;
+                }
+            }
+
+        }
+    }
 }
