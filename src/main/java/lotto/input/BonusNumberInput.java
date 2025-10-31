@@ -18,6 +18,7 @@ public class BonusNumberInput {
                 validator.checkNumber(input);
                 int bonus = validator.checkBonusRange(input);
                 validator.checkDuplicateWithWinningNumber(winningNumbers, bonus);
+                System.out.println();
                 return new BonusNumberDto(bonus);
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());

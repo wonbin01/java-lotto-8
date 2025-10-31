@@ -17,6 +17,7 @@ public class PrintResult {
         for (Lotto lotto : lottoListDto.getLottolist()) {
             System.out.println(lotto);
         }
+        System.out.println();
     }
 
     public void printResults(List<LottoMatchResult> results) {

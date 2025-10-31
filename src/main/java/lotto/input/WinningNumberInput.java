@@ -18,6 +18,7 @@ public class WinningNumberInput {
                 validator.checkLottoCount(candidate);
                 validator.checkInLottoRange(candidate);
                 validator.checkhHasDuplicates(candidate);
+                System.out.println();
                 return new WinningNumbersDto(candidate);
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());

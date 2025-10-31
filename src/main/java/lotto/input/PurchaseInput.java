@@ -20,6 +20,7 @@ public class PurchaseInput {
                 purchaseAmount = purchaseValidator.checkRange(input);
                 purchaseValidator.checkPositive(purchaseAmount);
                 purchaseCount = purchaseValidator.checkThousandUnit(purchaseAmount);
+                System.out.println();
                 return new PurchaseDto(purchaseAmount, purchaseCount);
             } catch (IllegalArgumentException e) {
                 System.out.println("[ERROR] " + e.getMessage());
