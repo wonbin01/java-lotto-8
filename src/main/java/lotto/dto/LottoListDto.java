@@ -1,7 +1,7 @@
 package lotto.dto;
 
 import java.util.List;
-import lotto.entity.Lotto;
+import lotto.domain.Lotto;
 
 public class LottoListDto {
     private final List<Lotto> lottolist;

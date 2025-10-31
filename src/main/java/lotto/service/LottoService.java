@@ -4,12 +4,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMatchResult;
 import lotto.dto.BonusNumberDto;
 import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
 import lotto.dto.WinningNumbersDto;
-import lotto.entity.Lotto;
-import lotto.entity.LottoMatchResult;
 
 public class LottoService {
     public LottoListDto generateLottos(PurchaseDto dto) {
@@ -61,8 +61,29 @@ public class LottoService {
     }
 
     public void printResults(List<LottoMatchResult> results) {
+        int[] matchResult = getMatchResult(results);
         System.out.println("당첨 통계");
         System.out.println("---");
 
+    }
+
+    public int[] getMatchResult(List<LottoMatchResult> results) {
+        int[] matchResult = new int[6];
+        for (LottoMatchResult result : results) {
+            int count = result.getMatchCount();
+            boolean bonus = result.getIsBonusMatch();
+            if (count == 6) {
+                matchResult[1]++; //1등
+            } else if (count == 5 && bonus) {
+                matchResult[2]++; //2등
+            } else if (count == 5) {
+                matchResult[3]++; //3등
+            } else if (count == 4) {
+                matchResult[4]++; //4등
+            } else if (count == 3) {
+                matchResult[5]++;
+            }
+        }
+        return matchResult;
     }
 }
