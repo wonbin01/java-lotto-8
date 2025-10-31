@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPrize;
 import lotto.dto.BonusNumberDto;
 import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
@@ -13,11 +14,6 @@ import lotto.dto.WinningNumbersDto;
 import lotto.exception.ExceptionMessage;
 
 public class LottoService {
-    int firstPrice = 2000000000;
-    int secondPrice = 30000000;
-    int thridPrice = 1500000;
-    int forthPrice = 50000;
-    int fifthPrice = 5000;
 
     public LottoListDto generateLottos(PurchaseDto dto) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -96,11 +92,11 @@ public class LottoService {
     public float calculateMoney(int[] matchResult, PurchaseDto dto) {
         long purchaseAmount = dto.getPurchaseAmount();
 
-        long firstWinnerPrice = (long) matchResult[1] * firstPrice;
-        long secondWinnerPrice = (long) matchResult[2] * secondPrice;
-        long thirdWinnerPrice = (long) matchResult[3] * thridPrice;
-        long fourthWinnerPrice = (long) matchResult[4] * forthPrice;
-        long fifthWinnerPrice = (long) matchResult[5] * fifthPrice;
+        long firstWinnerPrice = (long) matchResult[1] * LottoPrize.FIRST.getAmount();
+        long secondWinnerPrice = (long) matchResult[2] * LottoPrize.SECOND.getAmount();
+        long thirdWinnerPrice = (long) matchResult[3] * LottoPrize.THIRD.getAmount();
+        long fourthWinnerPrice = (long) matchResult[4] * LottoPrize.FOURTH.getAmount();
+        long fifthWinnerPrice = (long) matchResult[5] * LottoPrize.FIFTH.getAmount();
 
         long totalPrice =
                 firstWinnerPrice + secondWinnerPrice + thirdWinnerPrice + fourthWinnerPrice + fifthWinnerPrice;
