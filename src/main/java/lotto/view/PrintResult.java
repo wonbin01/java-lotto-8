@@ -37,6 +37,7 @@ public class PrintResult {
 
     public void printPositveRate(int[] matchResult, PurchaseDto dto) {
         float positiveRate = lottoService.calculateMoney(matchResult, dto);
-        System.out.println("총 수익률은" + positiveRate + "%입니다.");
+        System.out.printf("총 수익률은 %.1f%%입니다.\n", positiveRate);
+
     }
 }
