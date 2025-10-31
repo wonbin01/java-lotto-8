@@ -12,6 +12,12 @@ import lotto.dto.PurchaseDto;
 import lotto.dto.WinningNumbersDto;
 
 public class LottoService {
+    int firstPrice = 2000000000;
+    int secondPrice = 30000000;
+    int thridPrice = 1500000;
+    int forthPrice = 50000;
+    int fifthPrice = 5000;
+
     public LottoListDto generateLottos(PurchaseDto dto) {
         List<Lotto> lottoList = new ArrayList<>();
         while (true) {
@@ -71,5 +77,21 @@ public class LottoService {
             }
         }
         return matchResult;
+    }
+
+    public float calculateMoney(int[] matchResult, PurchaseDto dto) {
+        long purchaseAmount = dto.getPurchaseAmount();
+
+        long firstWinnerPrice = (long) matchResult[1] * firstPrice;
+        long secondWinnerPrice = (long) matchResult[2] * secondPrice;
+        long thirdWinnerPrice = (long) matchResult[3] * thridPrice;
+        long fourthWinnerPrice = (long) matchResult[4] * forthPrice;
+        long fifthWinnerPrice = (long) matchResult[5] * fifthPrice;
+
+        long totalPrice =
+                firstWinnerPrice + secondWinnerPrice + thirdWinnerPrice + fourthWinnerPrice + fifthWinnerPrice;
+        float positiveRate = (float) totalPrice / purchaseAmount;
+        positiveRate = Math.round(positiveRate * 10) / 10.0f;
+        return positiveRate;
     }
 }

@@ -24,9 +24,9 @@ public class LottoController {
         printResult.printLottos(lottoListDto);
         WinningNumbersDto validWinningNumbers = winningNumberInput.getValidWinningNumbers();
         BonusNumberDto bonusNumber = bonusNumberInput.getBonusNumber(validWinningNumbers);
-        List<LottoMatchResult> mathResults = lottoService.validateResult(lottoListDto, validWinningNumbers,
+        List<LottoMatchResult> matchResults = lottoService.validateResult(lottoListDto, validWinningNumbers,
                 bonusNumber);
 
-        printResult.printResults(mathResults);
+        int[] results = printResult.printResults(matchResults);
     }
 }

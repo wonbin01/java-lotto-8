@@ -20,7 +20,7 @@ public class PrintResult {
         System.out.println();
     }
 
-    public void printResults(List<LottoMatchResult> results) {
+    public int[] printResults(List<LottoMatchResult> results) {
         int[] matchResult = lottoService.getMatchResult(results);
 
         System.out.println("당첨 통계");
@@ -30,5 +30,7 @@ public class PrintResult {
         System.out.println("5개 일치 (1,500,000원) - " + matchResult[3] + "개");
         System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + matchResult[2] + "개");
         System.out.println("6개 일치 (2,000,000,000원) - " + matchResult[1] + "개");
+
+        return matchResult;
     }
 }
