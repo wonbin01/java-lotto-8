@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import lotto.dto.WinningNumbersDto;
+import lotto.exception.ExceptionMessage;
 
 public class InputValidator {
     Long unit = 1000L;
@@ -13,13 +14,13 @@ public class InputValidator {
 
     public void checkBlank(String input) {
         if (input.equals("")) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_BLANK.getMessage());
         }
     }
 
     public void checkNumber(String input) {
         if (!input.matches("-?\\d+")) {
-            throw new IllegalArgumentException("정수를 입력해야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_NUMBER.getMessage());
         }
     }
 
@@ -27,19 +28,19 @@ public class InputValidator {
         try {
             return Long.parseLong(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("범위를 벗어났습니다. 입력범위 : 약 9경까지");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_RANGE.getMessage());
         }
     }
 
     public void checkPositive(Long purchaseAmount) {
         if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("양수를 입력해야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_POSIVITE.getMessage());
         }
     }
 
     public Long checkThousandUnit(Long purchaseAmount) {
         if (purchaseAmount % unit != 0) {
-            throw new IllegalArgumentException("1000원 단위로 입력해야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_THOUSAND_UNIT.getMessage());
         }
         return purchaseAmount / unit;
     }
@@ -52,7 +53,7 @@ public class InputValidator {
                 String changed = token.replaceAll(" ", "");
                 list.add(Integer.parseInt(changed));
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("정수를 입력해야합니다.");
+                throw new IllegalArgumentException(ExceptionMessage.COMMA_SEPARATE_NUMBERS.getMessage());
             }
         }
         return list;
@@ -61,7 +62,7 @@ public class InputValidator {
     public void checkInLottoRange(List<Integer> list) {
         for (int num : list) {
             if (num < min || num > max) {
-                throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
+                throw new IllegalArgumentException(ExceptionMessage.CHECK_IN_LOTTO_RANGE.getMessage());
             }
         }
     }
@@ -71,10 +72,10 @@ public class InputValidator {
         try {
             num = Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 번호는 1~45 사이여야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
         }
         if (num < 1 || num > 45) {
-            throw new IllegalArgumentException("보너스 번호는 1~45 사이여야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
         }
         return num;
     }
@@ -82,19 +83,20 @@ public class InputValidator {
 
     public void checkLottoCount(List<Integer> list) {
         if (list.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개 입력되어야합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_LOTTO_COUNT.getMessage());
         }
     }
 
     public void checkhHasDuplicates(List<Integer> list) {
         if (list.size() != new HashSet<>(list).size()) {
-            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.CHECK_HAS_DUPLICATE_NUMBERS.getMessage());
         }
     }
 
     public void checkDuplicateWithWinningNumber(WinningNumbersDto winningNumbersDto, int bonus) {
         if (winningNumbersDto.getWinningNumbers().contains(bonus)) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호사이에서 중복된 숫자가 존재합니다.");
+            throw new IllegalArgumentException(
+                    ExceptionMessage.CHECK_DUPLICATE_NUMBERS_WITH_WINNING_NUMBERS.getMessage());
         }
     }
 }
