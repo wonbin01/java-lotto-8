@@ -9,6 +9,7 @@ import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
 import lotto.dto.WinningNumbersDto;
 import lotto.entity.Lotto;
+import lotto.entity.LottoMatchResult;
 
 public class LottoService {
     public LottoListDto generateLottos(PurchaseDto dto) {
@@ -40,20 +41,22 @@ public class LottoService {
         }
     }
 
-    public void validateResult(LottoListDto lottoListDto, WinningNumbersDto winningNumbersDto,
-                               BonusNumberDto bonusNumberDto) { // 당첨 로또 번호 확인
+    public List<LottoMatchResult> validateResult(LottoListDto lottoListDto, WinningNumbersDto winningNumbersDto,
+                                                 BonusNumberDto bonusNumberDto) { // 당첨 로또 번호 확인
+        List<LottoMatchResult> results = new ArrayList<>();
         for (Lotto lotto : lottoListDto.getLottolist()) {
-            int originalBall = 0;
-            int bonusBall = 0;
+            int matchCount = 0;
+            boolean bonusBall = false;
             for (int num : lotto.getNumbers()) {
                 if (winningNumbersDto.getWinningNumbers().contains(num)) {
-                    originalBall++;
+                    matchCount++;
                 }
                 if (bonusNumberDto.getBonusNumber() == num) {
-                    bonusBall++;
+                    bonusBall = true;
                 }
             }
-
+            results.add(new LottoMatchResult(matchCount, bonusBall));
         }
+        return results;
     }
 }
