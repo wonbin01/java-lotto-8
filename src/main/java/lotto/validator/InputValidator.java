@@ -72,7 +72,7 @@ public class InputValidator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
         }
-        if (num < 1 || num > 45) {
+        if (num < LottoRange.MIN.getValue() || num > LottoRange.MAX.getValue()) {
             throw new IllegalArgumentException(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
         }
         return num;
