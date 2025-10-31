@@ -28,5 +28,6 @@ public class LottoController {
                 bonusNumber);
 
         int[] results = printResult.printResults(matchResults);
+        printResult.printPositveRate(results, purchaseDto);
     }
 }

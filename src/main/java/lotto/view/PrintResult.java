@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatchResult;
 import lotto.dto.LottoListDto;
+import lotto.dto.PurchaseDto;
 import lotto.service.LottoService;
 
 public class PrintResult {
@@ -32,5 +33,10 @@ public class PrintResult {
         System.out.println("6개 일치 (2,000,000,000원) - " + matchResult[1] + "개");
 
         return matchResult;
+    }
+
+    public void printPositveRate(int[] matchResult, PurchaseDto dto) {
+        float positiveRate = lottoService.calculateMoney(matchResult, dto);
+        System.out.println("총 수익률은" + positiveRate + "%입니다.");
     }
 }
