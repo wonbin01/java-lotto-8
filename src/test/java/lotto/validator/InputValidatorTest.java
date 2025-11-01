@@ -97,4 +97,12 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.COMMA_SEPARATE_NUMBERS.getMessage());
     }
+
+    @Test
+    public void 빈문자열_포함시_예외발생() {
+        String input = " ,3,4";
+        Assertions.assertThatThrownBy(() -> validator.commaSeparatedNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.COMMA_SEPARATE_NUMBERS.getMessage());
+    }
 }
