@@ -1,5 +1,6 @@
 package lotto.validator;
 
+import java.util.List;
 import lotto.exception.ExceptionMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -80,5 +81,12 @@ public class InputValidatorTest {
         long input = 10000;
         Assertions.assertThatCode(() -> validator.checkThousandUnit(input))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    public void 정상_콤마_구분_정수_변환() {
+        String input = "1, 2,3, 4,5";
+        List<Integer> result = validator.commaSeparatedNumbers(input);
+        Assertions.assertThat(result).containsExactly(1, 2, 3, 4, 5);
     }
 }
