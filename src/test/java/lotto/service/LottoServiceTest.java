@@ -3,6 +3,7 @@ package lotto.service;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoPrize;
 import lotto.dto.BonusNumberDto;
 import lotto.dto.LottoListDto;
 import lotto.dto.PurchaseDto;
@@ -107,5 +108,21 @@ public class LottoServiceTest {
         Assertions.assertThat(matchResult[5]).isEqualTo(1);
         Assertions.assertThat(matchResult[0]).isEqualTo(0);
 
+    }
+
+    @Test
+    public void 수익률_계산_테스트() {
+        LottoService service = new LottoService();
+        int[] matchResult = {0, 1, 0, 1, 0, 2};
+        PurchaseDto dto = new PurchaseDto(5000, 5);
+
+        float rate = service.calculateMoney(matchResult, dto);
+
+        long totalPrize = LottoPrize.FIRST.getAmount() +
+                LottoPrize.THIRD.getAmount() +
+                (LottoPrize.FIFTH.getAmount() * 2);
+
+        float expected = Math.round((float) totalPrize / dto.getPurchaseAmount() * 100);
+        Assertions.assertThat(rate).isEqualTo(expected);
     }
 }
