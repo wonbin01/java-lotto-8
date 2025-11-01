@@ -135,4 +135,12 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
     }
+
+    @Test
+    public void 범위_벗어난_보너스번호_입력시_예외() {
+        String input = "46";
+        Assertions.assertThatThrownBy(() -> validator.checkBonusRange(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
+    }
 }
