@@ -21,4 +21,11 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkBlank(input))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 숫자가_입력되면_통과() {
+        String input = "123";
+        Assertions.assertThatCode(() -> validator.checkNumber(input))
+                .doesNotThrowAnyException();
+    }
 }
