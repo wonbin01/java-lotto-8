@@ -86,4 +86,26 @@ public class LottoServiceTest {
         int result = service.getPrizeIndex(2, false);
         Assertions.assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    public void getMatchResult_등수별_카운트_테스트() {
+        LottoService service = new LottoService();
+        List<LottoMatchResult> results = List.of(
+                new LottoMatchResult(6, false),
+                new LottoMatchResult(5, true),
+                new LottoMatchResult(5, false),
+                new LottoMatchResult(4, false),
+                new LottoMatchResult(3, false),
+                new LottoMatchResult(2, false)
+        );
+        int[] matchResult = service.getMatchResult(results);
+
+        Assertions.assertThat(matchResult[1]).isEqualTo(1);
+        Assertions.assertThat(matchResult[2]).isEqualTo(1);
+        Assertions.assertThat(matchResult[3]).isEqualTo(1);
+        Assertions.assertThat(matchResult[4]).isEqualTo(1);
+        Assertions.assertThat(matchResult[5]).isEqualTo(1);
+        Assertions.assertThat(matchResult[0]).isEqualTo(0);
+
+    }
 }
