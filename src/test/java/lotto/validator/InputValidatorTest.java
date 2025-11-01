@@ -127,4 +127,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkBonusRange(input))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 숫자가_아닌_보너스번호_입력시_예외발생() {
+        String input = "칠";
+        Assertions.assertThatThrownBy(() -> validator.checkBonusRange(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_BONUS_NUMBER.getMessage());
+    }
 }
