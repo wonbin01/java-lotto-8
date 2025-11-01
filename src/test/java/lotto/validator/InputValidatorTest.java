@@ -158,4 +158,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_LOTTO_COUNT.getMessage());
     }
+
+    @Test
+    public void 로또_번호가_중복되지_않은_경우_통과() {
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
+        Assertions.assertThatCode(() -> validator.checkLottoCount(list))
+                .doesNotThrowAnyException();
+    }
 }
