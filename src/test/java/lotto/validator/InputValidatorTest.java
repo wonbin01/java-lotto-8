@@ -89,4 +89,12 @@ public class InputValidatorTest {
         List<Integer> result = validator.commaSeparatedNumbers(input);
         Assertions.assertThat(result).containsExactly(1, 2, 3, 4, 5);
     }
+
+    @Test
+    public void 숫자가_아닌값_포함시_예외발생() {
+        String input = "1,2,3,사,5";
+        Assertions.assertThatThrownBy(() -> validator.commaSeparatedNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.COMMA_SEPARATE_NUMBERS.getMessage());
+    }
 }
