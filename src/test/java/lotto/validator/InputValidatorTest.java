@@ -59,4 +59,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_POSIVITE.getMessage());
     }
+
+    @Test
+    public void 양수가_입력되면_통과() {
+        long input = 5000;
+        Assertions.assertThatCode(() -> validator.checkPositive(input))
+                .doesNotThrowAnyException();
+    }
 }
