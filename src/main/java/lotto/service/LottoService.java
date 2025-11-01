@@ -56,7 +56,7 @@ public class LottoService {
         return results;
     }
 
-    private int getPrizeIndex(int matchCount, boolean isBonus) {
+    public int getPrizeIndex(int matchCount, boolean isBonus) {
         if (matchCount == 6) {
             return 1;           // 1등
         }

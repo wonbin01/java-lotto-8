@@ -44,4 +44,46 @@ public class LottoServiceTest {
         Assertions.assertThat(results.get(2).getMatchCount()).isEqualTo(5);
         Assertions.assertThat(results.get(2).getIsBonusMatch()).isFalse();
     }
+
+    @Test
+    public void getPrizeIndex_1등_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(6, false);
+        Assertions.assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void getPrizeIndex_2등_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(5, true);
+        Assertions.assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    public void getPrizeIndex_3등_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(5, false);
+        Assertions.assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    public void getPrizeIndex_4등_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(4, false);
+        Assertions.assertThat(result).isEqualTo(4);
+    }
+
+    @Test
+    public void getPrizeIndex_5등_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(3, false);
+        Assertions.assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    public void getPrizeIndex_당첨안됨_테스트() {
+        LottoService service = new LottoService();
+        int result = service.getPrizeIndex(2, false);
+        Assertions.assertThat(result).isEqualTo(0);
+    }
 }
