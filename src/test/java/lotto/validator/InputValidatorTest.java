@@ -182,4 +182,13 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkDuplicateWithWinningNumber(winningNumbersDto, bonus))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 당첨번호와_보너스번호가_중복된경우_예외발생() {
+        WinningNumbersDto winningNumbersDto = new WinningNumbersDto(List.of(1, 2, 3, 4, 5, 6));
+        int bonus = 3;
+        Assertions.assertThatThrownBy(() -> validator.checkDuplicateWithWinningNumber(winningNumbersDto, bonus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_DUPLICATE_NUMBERS_WITH_WINNING_NUMBERS.getMessage());
+    }
 }
