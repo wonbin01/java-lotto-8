@@ -44,4 +44,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_RANGE.getMessage());
     }
+
+    @Test
+    public void long_범위_안으로_들어오는_입력이_주어지면_통과() {
+        String input = "5000";
+        Assertions.assertThatCode(() -> validator.checkRange(input))
+                .doesNotThrowAnyException();
+    }
 }
