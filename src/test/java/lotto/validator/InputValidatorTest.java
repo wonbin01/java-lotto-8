@@ -28,4 +28,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkNumber(input))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 다른문자가_입력되면_오류발생() {
+        String input = "천원";
+        Assertions.assertThatThrownBy(() -> validator.checkNumber(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_NUMBER.getMessage());
+    }
 }
