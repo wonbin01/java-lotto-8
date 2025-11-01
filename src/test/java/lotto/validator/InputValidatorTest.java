@@ -74,4 +74,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_THOUSAND_UNIT.getMessage());
     }
+
+    @Test
+    public void 천원_단위로_주어지면_통과() {
+        long input = 10000;
+        Assertions.assertThatCode(() -> validator.checkThousandUnit(input))
+                .doesNotThrowAnyException();
+    }
 }
