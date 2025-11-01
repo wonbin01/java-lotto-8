@@ -112,4 +112,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkInLottoRange(list))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 로또_범위를_벗어난_경우_예외발생() {
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 46);
+        Assertions.assertThatThrownBy(() -> validator.checkInLottoRange(list))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_IN_LOTTO_RANGE.getMessage());
+    }
 }
