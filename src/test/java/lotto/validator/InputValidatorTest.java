@@ -36,4 +36,12 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_NUMBER.getMessage());
     }
+
+    @Test
+    public void long_범위를_벗어나는_입력이_주어지면_오류발생() {
+        String input = "13215641612168432154613216845132164";
+        Assertions.assertThatThrownBy(() -> validator.checkRange(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_RANGE.getMessage());
+    }
 }
