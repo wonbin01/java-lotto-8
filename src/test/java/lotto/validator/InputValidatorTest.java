@@ -14,4 +14,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_BLANK.getMessage());
     }
+
+    @Test
+    public void 정상입력_통과_테스트() {
+        String input = "로또";
+        Assertions.assertThatCode(() -> validator.checkBlank(input))
+                .doesNotThrowAnyException();
+    }
 }
