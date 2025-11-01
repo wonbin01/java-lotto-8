@@ -120,4 +120,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_IN_LOTTO_RANGE.getMessage());
     }
+
+    @Test
+    public void 정상_보너스_번호_입력() {
+        String input = "7";
+        Assertions.assertThatCode(() -> validator.checkBonusRange(input))
+                .doesNotThrowAnyException();
+    }
 }
