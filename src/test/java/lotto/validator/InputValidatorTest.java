@@ -150,4 +150,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkLottoCount(list))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 로또_번호의_개수가_6개가_아닌경우_예외발생() {
+        List<Integer> list = List.of(1, 2, 3, 4, 5);
+        Assertions.assertThatThrownBy(() -> validator.checkLottoCount(list))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_LOTTO_COUNT.getMessage());
+    }
 }
