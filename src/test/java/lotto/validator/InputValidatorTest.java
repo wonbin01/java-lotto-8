@@ -66,4 +66,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkPositive(input))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 천원_단위로_주어지지않으면_예외_발생() {
+        long input = 5001;
+        Assertions.assertThatThrownBy(() -> validator.checkThousandUnit(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_THOUSAND_UNIT.getMessage());
+    }
 }
