@@ -105,4 +105,11 @@ public class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.COMMA_SEPARATE_NUMBERS.getMessage());
     }
+
+    @Test
+    public void 로또_범위에_포함된_경우_통과() {
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
+        Assertions.assertThatCode(() -> validator.checkInLottoRange(list))
+                .doesNotThrowAnyException();
+    }
 }
