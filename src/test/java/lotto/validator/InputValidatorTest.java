@@ -1,6 +1,7 @@
 package lotto.validator;
 
 import java.util.List;
+import lotto.dto.WinningNumbersDto;
 import lotto.exception.ExceptionMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -172,5 +173,13 @@ public class InputValidatorTest {
         Assertions.assertThatThrownBy(() -> validator.checkhHasDuplicates(list))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.CHECK_HAS_DUPLICATE_NUMBERS.getMessage());
+    }
+
+    @Test
+    public void 당첨번호와_보너스번호가_중복되지_않은_경우_통과() {
+        WinningNumbersDto winningNumbersDto = new WinningNumbersDto(List.of(1, 2, 3, 4, 5, 6));
+        int bonus = 7;
+        Assertions.assertThatCode(() -> validator.checkDuplicateWithWinningNumber(winningNumbersDto, bonus))
+                .doesNotThrowAnyException();
     }
 }
