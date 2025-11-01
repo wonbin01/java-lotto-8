@@ -51,4 +51,12 @@ public class InputValidatorTest {
         Assertions.assertThatCode(() -> validator.checkRange(input))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    public void 음수가_주어지면_예외_발생() {
+        long input = -1000;
+        Assertions.assertThatThrownBy(() -> validator.checkPositive(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_POSIVITE.getMessage());
+    }
 }
