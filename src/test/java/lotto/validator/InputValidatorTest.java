@@ -162,7 +162,15 @@ public class InputValidatorTest {
     @Test
     public void 로또_번호가_중복되지_않은_경우_통과() {
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
-        Assertions.assertThatCode(() -> validator.checkLottoCount(list))
+        Assertions.assertThatCode(() -> validator.checkhHasDuplicates(list))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    public void 로또_번호가_중복된_경우_예외발생() {
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 5);
+        Assertions.assertThatThrownBy(() -> validator.checkhHasDuplicates(list))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.CHECK_HAS_DUPLICATE_NUMBERS.getMessage());
     }
 }
