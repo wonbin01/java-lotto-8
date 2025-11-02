@@ -51,3 +51,73 @@
 4. 보너스 번호 입력
 5. 당첨 내역 계산 및 출력
 6. 수익률 출력
+
+## 테스트
+
+| 구분                 | 테스트 항목                      | 기대 동작 / 예외 메시지                       |
+|--------------------|-----------------------------|--------------------------------------|
+| LottoTest          | 로또 번호의 개수가 6개를 넘어가는 경우      | IllegalArgumentException 예외 발생       |
+|                    | 로또 번호에 중복된 숫자가 존재하는 경우      | IllegalArgumentException 예외 발생       |
+| LottoServiceTest   | 로또 번호 정상 생성                 | 예외 없음                                |
+|                    | 당첨 결과 정상 검증                 | 예외 없음                                |
+|                    | 등수 테스트                      | 예외 없음                                |
+|                    | 수익률 계산 테스트                  | ex> 62.5%                            |
+| InputValidatorTest | 빈칸이 주어진 경우                  | `“입력값이 비어있습니다.”`                     |
+|                    | 사용자 정상 입력                   | 예외 없음                                |
+|                    | 숫자가 입력된 경우                  | 예외 없음                                |
+|                    | 숫자가 아닌 다른 문자가 입력된 경우        | `“정수를 입력해야 합니다.”`                    |
+|                    | long의 범위를 벗어나는 입력이 주어진 경우   | `"범위를 벗어났습니다. 입력범위 : 약 9경까지"`        |
+|                    | long  범위 안에 들어오는 입력이 주어진 경우 | 예외 없음                                |
+|                    | 음수가 주어진 경우                  | `"양수를 입력해야 합니다."`                    |
+|                    | 양수가 주어진 경우                  | 예외 없음                                |
+|                    | 천원 단위로 줘어지지 않은 경우           | `"1000원 단위로 입력해야 합니다."`              |
+|                    | 천원 단위로 주어진 경우               | 예외 없음                                |
+|                    | 정상 콤마가 주어진 경우               | 예외 없음                                |
+|                    | 콤마 사이에 숫자가 아닌 다른 값이 주어진 경우  | `"1~45 사이의 정수 6개를 입력해야 합니다."`        |
+|                    | 빈문자열 포함시 예외 발생              | `"1~45 사이의 정수 6개를 입력해야 합니다."`        |
+|                    | 주어진 입력이 로또 범위에 포함된 경우       | 예외 없음                                |
+|                    | 주어진 입력이 로또 범위를 벗어난 경우       | `"로또 번호는 1~45 사이여야 합니다."`            |
+|                    | 정상 보너스 번호 입력                | 예외 없음                                |
+|                    | 숫자가 아닌 보너스 번호 입력된 경우        | `"보너스 번호는 1~45 사이여야 합니다."`           |
+|                    | 당첨번호로 6개가 입력된 경우            | 예외 없음                                |
+|                    | 당첨번호로 6개 초과 또는 미만이 입력된 경우   | `"로또 번호는 6개 입력되어야합니다."`              |
+|                    | 보너스 번호와 당첨번호가 중복되지 않은 경우    | 예외 없음                                |
+|                    | 보너스 번호와 당첨번호가 중복된 경우        | `"당첨 번호와 보너스 번호사이에서 중복된 숫자가 존재합니다."` |
+|                    |                             |                                      |
+
+### 대표 테스트 코드 예시
+
+```jsx
+
+@Test
+void 당첨번호와_보너스번호가_중복되지_않은_경우_통과()
+{
+    WinningNumbersDto
+    winningNumbersDto = new WinningNumbersDto(List.of(1, 2, 3, 4, 5, 6));
+    int
+    bonus = 7;
+
+    assertThatCode(() ->
+        validator.checkDuplicateWithWinningNumber(winningNumbersDto, bonus)
+    ).doesNotThrowAnyException();
+}
+
+@Test
+void 당첨번호와_보너스번호가_중복된경우_예외발생()
+{
+    WinningNumbersDto
+    winningNumbersDto = new WinningNumbersDto(List.of(1, 2, 3, 4, 5, 6));
+    int
+    bonus = 3;
+
+    assertThatThrownBy(() ->
+        validator.checkDuplicateWithWinningNumber(winningNumbersDto, bonus)
+    ).isInstanceOf(IllegalArgumentException.class)
+        .hasMessage(ExceptionMessage.CHECK_DUPLICATE_NUMBERS_WITH_WINNING_NUMBERS.getMessage());
+}
+```
+
+**테스트 성공 예시**
+
+`BUILD SUCCESSFUL in 12s  
+3 actionable tasks: 3 executed`
